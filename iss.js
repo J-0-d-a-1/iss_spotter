@@ -26,4 +26,24 @@ const fetchMyIP = function (callback) {
   });
 };
 
-module.exports = { fetchMyIP };
+const fetchCoordsByIP = function (ip, callback) {
+  needle.get(`http://ipwho.is/${ip}`, (error, response, body) => {
+    if (error) {
+      callback(error, null);
+      return;
+    }
+
+    if (!body.success) {
+      const message = `Success status was ${body.success}. Server message says: ${body.message} wjen fetching for IP: ${body.ip}`;
+      callback(Error(message), null);
+      return;
+    }
+
+    callback(`{ latitude: ${body.latitude}, longitude: ${body.longitude}}`);
+  });
+};
+
+// fetchCoordsByIP("24.80.178.224", console.log);
+// fetchCoordsByIP("42", console.log);
+
+module.exports = { fetchMyIP, fetchCoordsByIP };
