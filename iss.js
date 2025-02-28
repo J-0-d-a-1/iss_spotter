@@ -18,7 +18,7 @@ const fetchMyIP = function (callback) {
     }
 
     if (response.statusCode !== 200) {
-      const msg = `Status Code ${response.statusCode} when fetching IP. Response: ${body}`;
+      const msg = `Status Code ${response.statusCode} when fetching latitude and longitude. Response: ${body}`;
       callback(Error(msg), null);
       return;
     }
