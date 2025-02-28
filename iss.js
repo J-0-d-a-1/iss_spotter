@@ -34,12 +34,12 @@ const fetchCoordsByIP = function (ip, callback) {
     }
 
     if (!body.success) {
-      const message = `Success status was ${body.success}. Server message says: ${body.message} wjen fetching for IP: ${body.ip}`;
+      const message = `Success status was ${body.success}. Server message says: ${body.message} when fetching for IP: ${body.ip}`;
       callback(Error(message), null);
       return;
     }
 
-    callback(`{ latitude: ${body.latitude}, longitude: ${body.longitude}}`);
+    callback(null, { latitude: body.latitude, longitude: body.longitude });
   });
 };
 
